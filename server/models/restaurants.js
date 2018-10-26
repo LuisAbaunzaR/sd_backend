@@ -1,8 +1,15 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Restaurants = sequelize.define('Restaurants', {
-    name: DataTypes.STRING,
-    kind: DataTypes.ENUM,
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue:DataTypes.UUIDV4
+    },
+    name: {type:DataTypes.STRING,
+      allowNull:false},
+    kind: {type:DataTypes.ENUM,values:["INTERNACIONAL","PIZZA","DESAYUNO","POSTRES","PANADERIA","MEXICANA","SALUDABLE","HAMBURGUESAS","ITALIANA","SUSHI","ASIATICA","ENSALADAS","AMERICANA","VEGANA","CHINA","COMIDA RAPIDA","ESPANOLA","LATINA"]},
     description: DataTypes.STRING,
     logo: DataTypes.STRING,
     tel: DataTypes.STRING,
@@ -16,6 +23,13 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Restaurants.associate = function(models) {
     // associations can be defined here
+
+    Restaurants.belongsTo(models.Users,{foreignKey:"userId", as:"user"})
+    Restaurants.hasMany(models.Dishes,{foreignKey:"restaurantId"})
+    Restaurants.hasMany(models.Orders,{foreignKey:"restaurantId",as:"orders"})
+
+
+
   };
   return Restaurants;
 };

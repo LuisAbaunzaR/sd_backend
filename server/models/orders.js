@@ -1,8 +1,14 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Orders = sequelize.define('Orders', {
-    date: DataTypes.DATE,
-    hours: DataTypes.TIME,
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue:DataTypes.UUIDV4
+    },
+    date: { type: DataTypes.DATE, defaultValue: Sequelize.NOW},
+    hours: { type:DataTypes.TIME, defaultValue: Sequelize.NOW},
     total: DataTypes.DECIMAL,
     notes: DataTypes.STRING,
     tel: DataTypes.STRING,
@@ -13,10 +19,13 @@ module.exports = (sequelize, DataTypes) => {
     zip_code_to_deliver: DataTypes.STRING,
     lat_to_deliver: DataTypes.FLOAT,
     long_to_deliver: DataTypes.FLOAT,
-    status: DataTypes.ENUM
+    status: {type:DataTypes.ENUM,values:["PENDIENTE","PAGADA","CANCELADA"]}
   }, {});
   Orders.associate = function(models) {
     // associations can be defined here
+    Orders.belongsTo(models.Users,{foreignKey:"userId", as:"user"})
+    Orders.belongsTo(models.Restaurants,{foreignKey:"restaurantId"})
+    Orders.hasMany(models.OrderDishes,{foreignKey:"orderId"})
   };
   return Orders;
 };
