@@ -4,9 +4,9 @@ module.exports = {
     return queryInterface.createTable('Orders', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue:Sequelize.UUIDV4
       },
       date: {
         type: Sequelize.DATE
@@ -45,7 +45,8 @@ module.exports = {
         type: Sequelize.FLOAT
       },
       status: {
-        type: Sequelize.ENUM
+        type: Sequelize.ENUM,
+        values: ["PENDIENTE","PAGADA","CANCELADA"]
       },
       createdAt: {
         allowNull: false,

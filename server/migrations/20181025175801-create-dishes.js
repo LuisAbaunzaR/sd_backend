@@ -4,21 +4,22 @@ module.exports = {
     return queryInterface.createTable('Dishes', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue:Sequelize.UUIDV4
       },
       name: {
         type: Sequelize.STRING
       },
       kind_food: {
-        type: Sequelize.ENUM
+        type: Sequelize.ENUM,
+        values:["INTERNACIONAL","PIZZA","DESAYUNO","POSTRES","PANADERIA","MEXICANA","SALUDABLE","HAMBURGUESAS","ITALIANA","SUSHI","ASIATICA","ENSALADAS","AMERICANA","VEGANA","CHINA","COMIDA RAPIDA","ESPANOLA","LATINA"]
       },
       description: {
         type: Sequelize.STRING
       },
       price: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL(10,2)
       },
       quantity: {
         type: Sequelize.STRING
