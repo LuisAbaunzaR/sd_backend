@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
 
     Restaurants.belongsTo(models.Users,{foreignKey:"userId", as:"user"})
-    Restaurants.hasMany(models.Dishes,{foreignKey:"restaurantId"})
+    Restaurants.hasMany(models.Dishes,{foreignKey:"restaurantId", as:"dishes"})
     Restaurants.hasMany(models.Orders,{foreignKey:"restaurantId",as:"orders"})
 
 

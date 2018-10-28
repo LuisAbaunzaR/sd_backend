@@ -9,7 +9,8 @@ module.exports = {
         defaultValue:Sequelize.UUIDV4
       },
       quantity_dishes: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER,
+        allowNull:false
       },
       dish_specification: {
         type: Sequelize.STRING

@@ -9,7 +9,9 @@ module.exports = {
         defaultValue:Sequelize.UUIDV4
       },
       name: {
+        allowNull: false,
         type: Sequelize.STRING
+       
       },
       kind_food: {
         type: Sequelize.ENUM,
@@ -19,13 +21,15 @@ module.exports = {
         type: Sequelize.STRING
       },
       price: {
+        allowNull: false,
         type: Sequelize.DECIMAL(10,2)
+        
       },
       quantity: {
         type: Sequelize.STRING
       },
       photos: {
-        type: Sequelize.ARRAY
+        type: Sequelize.ARRAY(Sequelize.STRING)
       },
       createdAt: {
         allowNull: false,
